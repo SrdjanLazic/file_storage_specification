@@ -6,20 +6,50 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
+import java.util.List;
 
 public class LocalFileStorageImplementation implements FileStorage {
 
-    private String donwloadFolder = "/Download";
+    private String downloadFolder = "/Download";
     // TODO: treba dodati polje koje drzi root direktorijum skladista, i onda sve putanje promeniti tako da su relativne u odnosu na root
+    private String currentDirectory = "C:";
 
     @Override
     public void create(String path, String filename) {
-
+        if(filename.contains("{") && filename.contains("}")){
+            filename = filename.substring(1, filename.length()-1);
+            //String[] files = filename.split(",");
+            for(String files : filename.split(",")){
+                String fullPath = path + "/" + files;
+                File newFile = new File(fullPath);
+                try {
+                    newFile.createNewFile();
+                } catch (IOException e) { // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+        else {
+            String fullPath = path + "/" + filename;
+            File newFile = new File(fullPath);
+            try {
+                newFile.createNewFile();
+            } catch (IOException e) { // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
     public void create(String filename) {
-
+        String fullPath = currentDirectory + "/skladiste/" + filename;
+        File newFile = new File(fullPath);
+        try {
+            newFile.createNewFile();
+        } catch (IOException e) { // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -62,7 +92,8 @@ public class LocalFileStorageImplementation implements FileStorage {
 
     @Override
     public void list() {
-        File rootDirectory = new File("D:");
+        //File rootDirectory = new File("D:");
+        File rootDirectory = new File(currentDirectory);
         File[] fileList = rootDirectory.listFiles();
         String type;
 
@@ -81,6 +112,6 @@ public class LocalFileStorageImplementation implements FileStorage {
 
     @Override
     public void get(String path) {
-        move(path, donwloadFolder);
+        move(path, downloadFolder);
     }
 }
