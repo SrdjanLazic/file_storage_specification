@@ -2,7 +2,7 @@ package rs.edu.raf.storage;
 
 public interface FileStorage {
 
-    // ako unapred zadajemo putanju:
+    // ako unapred zadajemo putanju :
     void create(String path, String filename);
     // ako smestamo u korenski dir:
     void create(String filename);

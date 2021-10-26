@@ -70,7 +70,7 @@ public class LocalFileStorageImplementation implements FileStorage {
         System.out.println("-----------------------------------\n");
         for (File file: fileList){
             type = file.isDirectory() ? "folder" : "file";
-            System.out.println(file.getName() + " --- " + file.length() / (1024 * 1024) + " MB" + " --- " + type);
+            System.out.println(file.getName() + " --- " + file.length() / (1024 * 1024) + " MB " + " --- " + type);
         }
     }
 
