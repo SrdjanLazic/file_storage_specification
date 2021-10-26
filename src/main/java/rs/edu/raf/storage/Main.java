@@ -16,7 +16,8 @@ public class Main {
 
         //fileStorage.delete("D:/skladiste/tekst.txt");
         if (command.contains("create")) {
-            fileStorage.create("C:/skladiste", "{1,2,3,4}");
+            //fileStorage.create("C:/skladiste", "{1,2,3,4}");
+            fileStorage.create("iwanttodie");
         }
     }
 

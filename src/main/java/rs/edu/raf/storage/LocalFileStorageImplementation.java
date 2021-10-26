@@ -17,6 +17,7 @@ public class LocalFileStorageImplementation implements FileStorage {
 
     @Override
     public void create(String path, String filename) {
+        currentDirectory = path;
         if(filename.contains("{") && filename.contains("}")){
             filename = filename.substring(1, filename.length()-1);
             //String[] files = filename.split(",");
