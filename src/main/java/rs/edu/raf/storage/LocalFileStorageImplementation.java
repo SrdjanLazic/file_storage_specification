@@ -6,14 +6,20 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collections;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class LocalFileStorageImplementation implements FileStorage {
 
     private String downloadFolder = "/Download";
     // TODO: treba dodati polje koje drzi root direktorijum skladista, i onda sve putanje promeniti tako da su relativne u odnosu na root
-    private String currentDirectory = "C:";
+    private String currentDirectory = "D:";
+
+    private List<File> getFileList() {
+        File directory = new File(currentDirectory);
+        File[] fileList = directory.listFiles();
+        return Arrays.asList(fileList);
+    }
 
     @Override
     public void create(String path, String filename) {
@@ -93,22 +99,80 @@ public class LocalFileStorageImplementation implements FileStorage {
 
     @Override
     public void list() {
-        //File rootDirectory = new File("D:");
-        File rootDirectory = new File(currentDirectory);
-        File[] fileList = rootDirectory.listFiles();
+        List<File> fileList = getFileList();
         String type;
 
         System.out.println("\nLista fajlova i foldera u skladistu:");
         System.out.println("-----------------------------------\n");
         for (File file: fileList){
-            type = file.isDirectory() ? "folder" : "file";
+            type = file.isDirectory() ? "DIR" : "FILE";
             System.out.println(file.getName() + " --- " + file.length() / (1024 * 1024) + " MB " + " --- " + type);
         }
     }
 
     @Override
-    public void list(String argument) {
+    public void list(String argument, Operations operation) {
 
+        String type;
+        List<File> fileList = getFileList();
+
+        if (operation == Operations.FILTER_EXTENSION) {
+            String extension = argument;
+            System.out.println("\nLista fajlova sa datom ekstenzijom u skladistu:");
+            System.out.println("------------------------------------------------\n");
+            for (File file : fileList) {
+                if (file.getName().endsWith(extension))
+                    System.out.println(file.getPath());
+            }
+        } else if (operation == Operations.FILTER_FILENAME) {
+            String filename = argument;
+            System.out.println("\nLista fajlova ciji nazivi sadrze dati tekst:");
+            System.out.println("----------------------------------------------\n");
+            for (File file : fileList) {
+                if (file.getName().contains(filename))
+                    System.out.println(file.getPath());
+            }
+        } else if (operation == Operations.SORT_BY_NAME_ASC || operation == Operations.SORT_BY_NAME_DESC) {
+            String order;
+            if(operation == Operations.SORT_BY_NAME_ASC) {
+                fileList.sort(new FileNameComparator());
+                order = " rastuce ";
+            }
+            else {
+                fileList.sort(new FileNameComparator().reversed());
+                order = " opadajuce ";
+            }
+
+            System.out.println("\nLista fajlova i foldera sortirana" + order + "po nazivu:");
+            System.out.println("-----------------------------------------------------\n");
+            for (File file : fileList) {
+                type = file.isDirectory() ? "DIR" : "FILE";
+                System.out.println(file.getName() + " --- " + file.length() / (1024 * 1024) + " MB " + " --- " + type);
+            }
+        } else if (operation == Operations.SORT_BY_DATE_MODIFIED_ASC || operation == Operations.SORT_BY_DATE_MODIFIED_DESC) {
+            String order;
+            if(operation == Operations.SORT_BY_DATE_MODIFIED_ASC) {
+                fileList.sort(new FileModifiedDateComparator());
+                order = " rastuce ";
+            }
+            else {
+                fileList.sort(new FileModifiedDateComparator().reversed());
+                order = " opadajuce ";
+            }
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+
+            System.out.println("\nLista fajlova i foldera sortirana" + order + "po datumu izmene:");
+            System.out.println("-----------------------------------------------------\n");
+            for (File file : fileList) {
+
+                type = file.isDirectory() ? "DIR" : "FILE";
+                System.out.println(file.getName() + " --- " + file.length() / (1024 * 1024) + " MB" + " --- " + type + " --- " + sdf.format(file.lastModified()));
+            }
+        // TODO: treba videti sta sa ovim, po onome sto sam citao na netu,
+        //  Linux ne pise uopste ovu vrednost, tako da ja ne znam da li ovo moze ikako da se uradi a da radi svuda
+        } else if (operation == Operations.SORT_BY_DATE_CREATED) {
+
+        }
     }
 
     @Override

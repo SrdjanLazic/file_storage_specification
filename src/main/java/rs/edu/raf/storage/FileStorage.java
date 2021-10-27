@@ -11,7 +11,7 @@ public interface FileStorage {
     // TODO: list metode:
     // default implementacija bez argumenata: prikazi sve foldere i fajlove u root-u skladista:
     void list();
-    void list(String argument);
+    void list(String argument, Operations operation);
     // TODO: put metoda (smestanje):
 
     // preuzimanje u local storage-u je smestanje u neki ranije definisani folder
