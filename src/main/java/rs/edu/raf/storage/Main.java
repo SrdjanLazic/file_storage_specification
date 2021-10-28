@@ -1,5 +1,8 @@
 package rs.edu.raf.storage;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -14,12 +17,18 @@ public class Main {
         //fileStorage.list(".txt", Operations.FILTER_EXTENSION);
 
         //fileStorage.list("fajl", Operations.FILTER_FILENAME);
-        fileStorage.list(null, Operations.SORT_BY_DATE_MODIFIED_ASC);
-        fileStorage.list(null, Operations.SORT_BY_DATE_MODIFIED_DESC);
-        fileStorage.list(null, Operations.SORT_BY_NAME_ASC);
-        fileStorage.list(null, Operations.SORT_BY_NAME_DESC);
+//        fileStorage.list(null, Operations.SORT_BY_DATE_MODIFIED_ASC);
+//        fileStorage.list(null, Operations.SORT_BY_DATE_MODIFIED_DESC);
+//        fileStorage.list(null, Operations.SORT_BY_NAME_ASC);
+//        fileStorage.list(null, Operations.SORT_BY_NAME_DESC);
 
 
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            objectMapper.writeValueAsString(fileStorage);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
 
 
 //        while (true){

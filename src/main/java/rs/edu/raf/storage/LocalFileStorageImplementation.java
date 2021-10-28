@@ -1,5 +1,7 @@
 package rs.edu.raf.storage;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,6 +16,9 @@ public class LocalFileStorageImplementation implements FileStorage {
     private String downloadFolder = "/Download";
     // TODO: treba dodati polje koje drzi root direktorijum skladista, i onda sve putanje promeniti tako da su relativne u odnosu na root
     private String currentDirectory = "D:";
+    private long storageSize;
+    private List<String> unsupportedExtensions;
+    private int maxFiles;
 
     private List<File> getFileList() {
         File directory = new File(currentDirectory);
@@ -178,5 +183,17 @@ public class LocalFileStorageImplementation implements FileStorage {
     @Override
     public void get(String path) {
         move(path, downloadFolder);
+    }
+
+    public int getMaxFiles() {
+        return maxFiles;
+    }
+
+    public long getStorageSize() {
+        return storageSize;
+    }
+
+    public List<String> getUnsupportedExtensions() {
+        return unsupportedExtensions;
     }
 }
