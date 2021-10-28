@@ -13,7 +13,8 @@ public class LocalFileStorageImplementation implements FileStorage {
 
     private String downloadFolder = "/Download";
     // TODO: treba dodati polje koje drzi root direktorijum skladista, i onda sve putanje promeniti tako da su relativne u odnosu na root
-    private String currentDirectory = "D:";
+    //private String currentDirectory = "D:";
+    private String currentDirectory = "E:";
 
     private List<File> getFileList() {
         File directory = new File(currentDirectory);

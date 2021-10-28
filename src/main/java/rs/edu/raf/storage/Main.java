@@ -14,11 +14,12 @@ public class Main {
         //fileStorage.list(".txt", Operations.FILTER_EXTENSION);
 
         //fileStorage.list("fajl", Operations.FILTER_FILENAME);
+        /*
         fileStorage.list(null, Operations.SORT_BY_DATE_MODIFIED_ASC);
         fileStorage.list(null, Operations.SORT_BY_DATE_MODIFIED_DESC);
         fileStorage.list(null, Operations.SORT_BY_NAME_ASC);
         fileStorage.list(null, Operations.SORT_BY_NAME_DESC);
-
+        */
 
 
 
