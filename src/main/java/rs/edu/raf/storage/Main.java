@@ -3,10 +3,17 @@ package rs.edu.raf.storage;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Main {
 
     public static void main(String[] args) {
         FileStorage fileStorage = new LocalFileStorageImplementation();
+
         //Scanner input =  new Scanner(System.in);
         //String command = input.nextLine();
 
@@ -22,13 +29,18 @@ public class Main {
 //        fileStorage.list(null, Operations.SORT_BY_NAME_ASC);
 //        fileStorage.list(null, Operations.SORT_BY_NAME_DESC);
 
+        // FolderModel folderModel = ...
+        // folderModel.getFile().getParentFile();
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            objectMapper.writeValueAsString(fileStorage);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+
+
+
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        try {
+//            objectMapper.writeValueAsString(fileStorage);
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
 
 
 //        while (true){

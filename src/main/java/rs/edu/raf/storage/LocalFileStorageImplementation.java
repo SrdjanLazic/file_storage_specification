@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -25,6 +26,8 @@ public class LocalFileStorageImplementation implements FileStorage {
         File[] fileList = directory.listFiles();
         return Arrays.asList(fileList);
     }
+
+    // TODO: addUser metoda sa username, password i privileges
 
     @Override
     public void create(String path, String filename) {
