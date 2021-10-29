@@ -1,11 +1,14 @@
 package rs.edu.raf.storage;
 
 import java.io.File;
+import java.util.List;
 
 public class Skladiste {
 
     private File users;
     private File config;
+    private List<FolderModel> folders;
+    private List<FileModel> files;
 
     public Skladiste() {
         //users = new File(root + "/users.json");
@@ -16,4 +19,13 @@ public class Skladiste {
 
         // eksportuj ta dva fajla i sacuvaj ih
     }
+
+    public List<FolderModel> getFolders() {
+        return folders;
+    }
+
+    public List<FileModel> getFiles() {
+        return files;
+    }
 }
+
