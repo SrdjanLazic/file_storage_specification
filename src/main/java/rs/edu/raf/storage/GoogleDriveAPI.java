@@ -20,7 +20,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
 
-public class GoogleDriveAPI {
+public class GoogleDriveAPI implements FileStorage {
 
     /**
      * Application name.
@@ -107,5 +107,53 @@ public class GoogleDriveAPI {
                 System.out.printf("%s (%s)\n", file.getName(), file.getId());
             }
         }
+
+
+
+    }
+
+    @Override
+    public void createFolder(String path, String folderName) {
+
+    }
+
+    @Override
+    public void createFile(String path, String filename) {
+
+    }
+
+    @Override
+    public void createFolder(String folderName) {
+
+    }
+
+    @Override
+    public void createFile(String filename) {
+
+    }
+
+    @Override
+    public void delete(String path) {
+
+    }
+
+    @Override
+    public void move(String source, String destination) {
+
+    }
+
+    @Override
+    public void list() {
+
+    }
+
+    @Override
+    public void list(String argument, Operations operation) {
+
+    }
+
+    @Override
+    public void get(String path) {
+
     }
 }
