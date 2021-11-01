@@ -18,6 +18,8 @@ application {
     standardInput = System.in
 }*/
 
+// TODO: scope runtime videti gde se dodaje
+
 dependencies {
     compile 'com.google.api-client:google-api-client:1.23.0'
     compile 'com.google.oauth-client:google-oauth-client-jetty:1.23.0'
