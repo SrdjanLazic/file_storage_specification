@@ -1,25 +1,22 @@
 package rs.edu.raf.storage;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class LocalFileStorageImplementation implements FileStorage {
 
     private String downloadFolder = "/Download";
     // TODO: treba dodati polje koje drzi root direktorijum skladista, i onda sve putanje promeniti tako da su relativne u odnosu na root
     private String currentDirectory = "D:";
-    private long storageSize;
-    private List<String> unsupportedExtensions;
-    private int maxFiles;
+    private List<User> users;
+    private StorageModel currentStorage;
 
     private List<File> getFileList() {
         File directory = new File(currentDirectory);
@@ -27,42 +24,75 @@ public class LocalFileStorageImplementation implements FileStorage {
         return Arrays.asList(fileList);
     }
 
+    public LocalFileStorageImplementation(StorageModel storageModel){
+        this.currentStorage = storageModel;
+    }
+
     // TODO: addUser metoda sa username, password i privileges
 
     @Override
-    public void create(String path, String filename) {
-        currentDirectory = path;
-        if(filename.contains("{") && filename.contains("}")){
-            filename = filename.substring(1, filename.length()-1);
-            //String[] files = filename.split(",");
-            for(String files : filename.split(",")){
-                String fullPath = path + "/" + files;
-                File newFile = new File(fullPath);
-                try {
-                    newFile.createNewFile();
-                } catch (IOException e) { // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+    public void createFolder(String path, String folderName) {
+
+        if(folderName.contains("{") && folderName.contains("}")) {
+            String filenameBase;
+            int firstBrace = folderName.indexOf("{"), firstNum, secondNum;
+            filenameBase = folderName.substring(0, firstBrace);
+            System.out.println(filenameBase);
+            folderName = folderName.replaceAll("[^0-9]+", " ");
+            firstNum = Integer.parseInt(Arrays.asList(folderName.trim().split(" ")).get(0));
+            secondNum = Integer.parseInt(Arrays.asList(folderName.trim().split(" ")).get(1));
+
+            for (int i = firstNum; i <= secondNum; i++) {
+                File folder = new File(getCurrentStorage().getRootDirectory() + "/" + path + "/" + filenameBase + i);
+                System.out.println(folder.getPath());
+                folder.mkdir();
             }
         }
         else {
-            String fullPath = path + "/" + filename;
-            File newFile = new File(fullPath);
-            try {
-                newFile.createNewFile();
-            } catch (IOException e) { // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            String fullPath = getCurrentStorage().getRootDirectory() + "/" + path + "/" + folderName;
+            File newFolder = new File(fullPath);
+            newFolder.mkdir();
         }
     }
 
     @Override
-    public void create(String filename) {
-        String fullPath = currentDirectory + "/skladiste/" + filename;
-        File newFile = new File(fullPath);
+    public void createFile(String path, String filename) {
+
+        if(checkExtensions(filename)){
+            System.out.println("Greska! Nije moguce cuvati fajl u ovoj ekstenziji.");
+            return;
+        }
+
+        File newFile = new File(currentStorage.getRootDirectory() + path + "/" + filename);
+        System.out.println(newFile.getPath());
         try {
             newFile.createNewFile();
-        } catch (IOException e) { // TODO Auto-generated catch block
+            currentStorage.incrementCounter();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void createFolder(String folderName) {
+        File newFolder = new File(getCurrentStorage().getRootDirectory() + "/" + folderName);
+        newFolder.mkdir();
+        currentStorage.incrementCounter();
+    }
+
+    @Override
+    public void createFile(String filename) {
+
+        if(checkExtensions(filename)){
+            System.out.println("Greska! Nije moguce cuvati fajl u ovoj ekstenziji.");
+            return;
+        }
+
+        File newFile = new File(currentStorage.getRootDirectory() + "/" + filename);
+        try {
+            newFile.createNewFile();
+            currentStorage.incrementCounter();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -188,15 +218,22 @@ public class LocalFileStorageImplementation implements FileStorage {
         move(path, downloadFolder);
     }
 
-    public int getMaxFiles() {
-        return maxFiles;
+    public boolean checkExtensions(String filename){
+        boolean found = false;
+        for(String extension: currentStorage.getUnsupportedExtensions()){
+            if(filename.contains(extension)){
+                System.out.println("Nepodrzana ekstenzija!");
+                found = true;
+            }
+        }
+        return found;
     }
 
-    public long getStorageSize() {
-        return storageSize;
+    public void setCurrentStorage(StorageModel currentStorage) {
+        this.currentStorage = currentStorage;
     }
 
-    public List<String> getUnsupportedExtensions() {
-        return unsupportedExtensions;
+    public StorageModel getCurrentStorage() {
+        return currentStorage;
     }
 }

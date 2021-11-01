@@ -6,15 +6,15 @@ import java.util.List;
 public class FolderModel {
 
     private List<FileModel> files;
+    private List<FolderModel> folders;
     private FolderModel parentFolder;
-    private Skladiste root;
-    private File currentFolder;
+    private StorageModel root;
+    private File file;
+    // TODO: Parent za folder - moze biti i skladiste i folder, nekako ishendlovati to
 
 
-    public FolderModel(){
-
-
-
+    public FolderModel(File file){
+        this.file = file;
     }
 
     public List<FileModel> getFiles() {
@@ -25,11 +25,11 @@ public class FolderModel {
         return parentFolder;
     }
 
-    public Skladiste getRoot() {
+    public StorageModel getRoot() {
         return root;
     }
 
     public File getCurrentFolder() {
-        return currentFolder;
+        return file;
     }
 }

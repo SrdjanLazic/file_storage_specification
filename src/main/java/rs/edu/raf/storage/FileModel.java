@@ -5,10 +5,10 @@ import java.io.File;
 public class FileModel {
 
     private FolderModel parentFolder;
-    private File currentFile;
+    private File file;
 
-    public FileModel(){
-
+    public FileModel(File file){
+        this.file = file;
     }
 
     public FolderModel getParentFolder() {
@@ -16,6 +16,6 @@ public class FileModel {
     }
 
     public File getCurrentFile() {
-        return currentFile;
+        return file;
     }
 }

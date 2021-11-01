@@ -1,19 +1,22 @@
 package rs.edu.raf.storage;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class Main {
 
     public static void main(String[] args) {
-        FileStorage fileStorage = new LocalFileStorageImplementation();
 
+
+        //fileStorage.createFolder("D:","sasfagg{1..20}");
+        User user = new User("blabla", "123");
+        StorageModel storageModel = new StorageModel(user, "D:/storage1");
+
+        FileStorage fileStorage = new LocalFileStorageImplementation(storageModel);
+
+        storageModel.getUnsupportedExtensions().add(".txt");
+
+
+//        fileStorage.createFolder("download");
+//        fileStorage.createFile("/download", "fajl.txt");
+        fileStorage.createFile("tekstneki.txt");
         //Scanner input =  new Scanner(System.in);
         //String command = input.nextLine();
 
