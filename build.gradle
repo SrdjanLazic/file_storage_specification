@@ -1,6 +1,7 @@
 plugins {
     id 'application'
     id 'java'
+    id 'maven-publish'
 }
 
 group 'rs.edu.raf'
@@ -11,8 +12,21 @@ repositories {
 }
 
 application {
-    mainClassName = "rs.edu.raf.storage.Main"
+    //mainClassName = "rs.edu.raf.storage.Main"
 }
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'rs.edu.raf'
+            artifactId = 'store-manager'
+            version = '1.0'
+
+            from components.java
+        }
+    }
+}
+
 
 /*run {
     standardInput = System.in
@@ -21,9 +35,7 @@ application {
 // TODO: scope runtime videti gde se dodaje
 
 dependencies {
-    compile 'com.google.api-client:google-api-client:1.23.0'
-    compile 'com.google.oauth-client:google-oauth-client-jetty:1.23.0'
-    compile 'com.google.apis:google-api-services-drive:v3-rev110-1.23.0'
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
