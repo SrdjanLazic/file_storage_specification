@@ -18,4 +18,6 @@ public interface FileStorage {
     // TODO: put metoda (smestanje):
 
     void get(String path);  // preuzimanje u local storage-u je smestanje u neki ranije definisani folder
+
+    void initializeStorage(String path);
 }
