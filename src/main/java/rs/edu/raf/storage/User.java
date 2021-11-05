@@ -14,6 +14,10 @@ public class User extends AbstractUser {
     // TODO: polje tipa boolean isSuperuser
 
 
+    public User(){
+
+    }
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;

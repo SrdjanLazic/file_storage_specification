@@ -1,5 +1,7 @@
 package rs.edu.raf.storage;
 
+import java.util.Set;
+
 public interface FileStorage {
 
     // Operacije nad skladistem:
@@ -27,7 +29,10 @@ public interface FileStorage {
     void limitStorageSize(long sizeInBytes);
     void restrictExtension(String extension);
 
-    // TODO: Dodavanje, uklanjanje korisnika:
+    // TODO: Dodavanje, uklanjanje korisnika, diskonektovanje:
     // -------------------------------------------------------------
+    void addNewUser(AbstractUser user, Set<Privileges> privilegesSet);
+    void disconnectUser(AbstractUser user);
+
 
 }
