@@ -9,10 +9,10 @@ public interface FileStorage {
     // Operacije nad skladistem:
     // ----------------------------------------------------------
 
-    void createFolder(String path, String folderName) throws InvalidExtensionException; // ako unapred zadajemo putanju
-    void createFile(String path, String filename);
+    void createFolder(String path, String folderName); // ako unapred zadajemo putanju
+    void createFile(String path, String filename) throws InvalidExtensionException;
     void createFolder(String folderName); // ako smestamo u korenski dir
-    void createFile(String filename);
+    void createFile(String filename) throws InvalidExtensionException;
     void delete(String path);
     void move(String source, String destination);
     void put(String source, String destination);
