@@ -1,8 +1,7 @@
 package rs.edu.raf.storage;
 
+import rs.edu.raf.storage.enums.Operations;
 import rs.edu.raf.storage.exceptions.InvalidExtensionException;
-
-import java.util.Set;
 
 public interface FileStorage {
 
@@ -21,20 +20,6 @@ public interface FileStorage {
 
     void get(String path);  // preuzimanje u local storage-u je smestanje u neki ranije definisani folder
 
-
-
-    // TODO: Konfiguracija skladsita (work in progress):
-    // ------------------------------------------------------------
-
-    void initializeStorage(String path);
-    void limitNumberOfFiles(int number, String directory);
-    void limitStorageSize(long sizeInBytes);
-    void restrictExtension(String extension);
-
-    // TODO: Dodavanje, uklanjanje korisnika, diskonektovanje:
-    // -------------------------------------------------------------
-    void addNewUser(AbstractUser user, Set<Privileges> privilegesSet);
-    void disconnectUser(AbstractUser user);
 
 
 }

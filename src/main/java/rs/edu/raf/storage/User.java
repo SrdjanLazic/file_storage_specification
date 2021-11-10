@@ -1,5 +1,7 @@
 package rs.edu.raf.storage;
 
+import rs.edu.raf.storage.enums.Privileges;
+
 import java.util.HashSet;
 import java.util.Set;
 
