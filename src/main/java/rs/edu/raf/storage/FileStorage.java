@@ -1,5 +1,7 @@
 package rs.edu.raf.storage;
 
+import rs.edu.raf.storage.exceptions.InvalidExtensionException;
+
 import java.util.Set;
 
 public interface FileStorage {
@@ -7,7 +9,7 @@ public interface FileStorage {
     // Operacije nad skladistem:
     // ----------------------------------------------------------
 
-    void createFolder(String path, String folderName); // ako unapred zadajemo putanju
+    void createFolder(String path, String folderName) throws InvalidExtensionException; // ako unapred zadajemo putanju
     void createFile(String path, String filename);
     void createFolder(String folderName); // ako smestamo u korenski dir
     void createFile(String filename);
