@@ -15,9 +15,9 @@ public interface FileStorage {
     void createFile(String filename);
     void delete(String path);
     void move(String source, String destination);
+    void put(String source, String destination);
     void list(); // default implementacija bez argumenata: prikazi sve foldere i fajlove u root-u skladista
     void list(String argument, Operations operation);
-    // TODO: put metoda (smestanje):
 
     void get(String path);  // preuzimanje u local storage-u je smestanje u neki ranije definisani folder
 
