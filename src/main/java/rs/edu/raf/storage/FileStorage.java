@@ -5,6 +5,7 @@ import rs.edu.raf.storage.enums.Privileges;
 import rs.edu.raf.storage.exceptions.FileNotFoundException;
 import rs.edu.raf.storage.exceptions.InsufficientPrivilegesException;
 import rs.edu.raf.storage.exceptions.InvalidExtensionException;
+import rs.edu.raf.storage.exceptions.UserNotFoundException;
 
 import java.util.Set;
 
@@ -22,7 +23,6 @@ public interface FileStorage {
     void put(String source, String destination);
     void list(); // default implementacija bez argumenata: prikazi sve foldere i fajlove u root-u skladista
     void list(String argument, Operations operation);
-
     void get(String path);  // preuzimanje u local storage-u je smestanje u neki ranije definisani folder
 
     // TODO: work in progress...
@@ -32,8 +32,8 @@ public interface FileStorage {
     void restrictExtension(String extension) throws InsufficientPrivilegesException;
 
     // TODO: work in progress...
-    void addNewUser(AbstractUser user, Set<Privileges> privilegesSet);
-    void disconnectUser(AbstractUser user);
+    void addNewUser(User user, Set<Privileges> privilegesSet);
+    void disconnectUser(User user) throws UserNotFoundException;
 
 
 

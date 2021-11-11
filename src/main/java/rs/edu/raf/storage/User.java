@@ -3,9 +3,11 @@ package rs.edu.raf.storage;
 import rs.edu.raf.storage.enums.Privileges;
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
-public class User extends AbstractUser {
+public class User {
 
     private String username;
     private String password;
@@ -47,6 +49,38 @@ public class User extends AbstractUser {
     }
 
     public void setPrivileges(Set<Privileges> privileges) {
-        this.privileges = privileges;
+        Set<Privileges> privilegesToAdd = new HashSet<>();
+
+        if(privileges.contains(Privileges.DELETE))
+            privilegesToAdd.addAll(List.of(Privileges.WRITE, Privileges.READ, Privileges.DELETE));
+        else if(privileges.contains(Privileges.WRITE))
+            privilegesToAdd.addAll(List.of(Privileges.READ, Privileges.WRITE));
+        else if(privileges.contains(Privileges.READ))
+            privilegesToAdd.add((Privileges.READ));
+
+        this.privileges = privilegesToAdd;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", privileges=" + privileges +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (!Objects.equals(username, user.username)) return false;
+        if (!Objects.equals(password, user.password)) return false;
+        return Objects.equals(privileges, user.privileges);
+    }
+
+
 }
