@@ -14,16 +14,16 @@ public interface FileStorage {
     // Operacije nad skladistem:
     // ----------------------------------------------------------
 
-    void createFolder(String path, String folderName); // ako unapred zadajemo putanju
-    void createFile(String path, String filename) throws InvalidExtensionException;
+    void createFolder(String path, String ... folderNames); // ako unapred zadajemo putanju
+    void createFile(String path, String ... filenames) throws InvalidExtensionException;
     void createFolder(String folderName); // ako smestamo u korenski dir
     void createFile(String filename) throws InvalidExtensionException;
-    void delete(String path) throws FileNotFoundException, InsufficientPrivilegesException;
-    void move(String source, String destination);
-    void put(String source, String destination);
+    void delete(String ... paths) throws FileNotFoundException, InsufficientPrivilegesException;
+    void move(String destination, String ... sources);
+    void put(String destination, String ... sources);
     void list(); // default implementacija bez argumenata: prikazi sve foldere i fajlove u root-u skladista
     void list(String argument, Operations operation);
-    void get(String path);  // preuzimanje u local storage-u je smestanje u neki ranije definisani folder
+    void get(String ... paths);  // preuzimanje u local storage-u je smestanje u neki ranije definisani folder
 
     // TODO: work in progress...
     void initializeStorage(String path) throws InsufficientPrivilegesException;
