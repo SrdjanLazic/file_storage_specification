@@ -18,7 +18,7 @@ public interface FileStorage {
     void delete(String ... paths) throws FileNotFoundException, InsufficientPrivilegesException;
     void move(String destination, String ... sources);
     void put(String destination, String ... sources) throws FileAlreadyInStorageException;
-    void list(); // default implementacija bez argumenata: prikazi sve foldere i fajlove u root-u skladista
+    void list(String path); // default implementacija bez argumenata: prikazi sve foldere i fajlove u root-u skladista
     void list(String path, String argument, Operations operation);
     void get(String ... paths);  // preuzimanje u local storage-u je smestanje u neki ranije definisani folder
 
