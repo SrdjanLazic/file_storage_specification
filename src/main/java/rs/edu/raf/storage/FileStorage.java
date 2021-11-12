@@ -2,10 +2,7 @@ package rs.edu.raf.storage;
 
 import rs.edu.raf.storage.enums.Operations;
 import rs.edu.raf.storage.enums.Privileges;
-import rs.edu.raf.storage.exceptions.FileNotFoundException;
-import rs.edu.raf.storage.exceptions.InsufficientPrivilegesException;
-import rs.edu.raf.storage.exceptions.InvalidExtensionException;
-import rs.edu.raf.storage.exceptions.UserNotFoundException;
+import rs.edu.raf.storage.exceptions.*;
 
 import java.util.Set;
 
@@ -20,7 +17,7 @@ public interface FileStorage {
     void createFile(String filename) throws InvalidExtensionException;
     void delete(String ... paths) throws FileNotFoundException, InsufficientPrivilegesException;
     void move(String destination, String ... sources);
-    void put(String destination, String ... sources);
+    void put(String destination, String ... sources) throws FileAlreadyInStorageException;
     void list(); // default implementacija bez argumenata: prikazi sve foldere i fajlove u root-u skladista
     void list(String argument, Operations operation);
     void get(String ... paths);  // preuzimanje u local storage-u je smestanje u neki ranije definisani folder
