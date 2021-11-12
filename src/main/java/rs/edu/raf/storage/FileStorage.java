@@ -23,7 +23,7 @@ public interface FileStorage {
     void get(String ... paths);  // preuzimanje u local storage-u je smestanje u neki ranije definisani folder
 
     // TODO: work in progress...
-    void initializeStorage(String path) throws InsufficientPrivilegesException;
+    void initializeStorage(String path) throws UserNotFoundException;
     void limitNumberOfFiles(int number, String directory) throws InsufficientPrivilegesException;
     void limitStorageSize(long sizeInBytes) throws InsufficientPrivilegesException;
     void restrictExtension(String extension) throws InsufficientPrivilegesException;
