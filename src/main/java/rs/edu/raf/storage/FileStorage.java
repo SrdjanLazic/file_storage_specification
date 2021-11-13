@@ -24,12 +24,12 @@ public interface FileStorage {
 
     // TODO: work in progress...
     void initializeStorage(String path) throws UserNotFoundException;
-    void limitNumberOfFiles(int number, String directory) throws InsufficientPrivilegesException;
+    void limitNumberOfFiles(int number, String directory) throws InsufficientPrivilegesException, FileNotFoundException;
     void limitStorageSize(long sizeInBytes) throws InsufficientPrivilegesException;
     void restrictExtension(String extension) throws InsufficientPrivilegesException;
 
     // TODO: work in progress...
-    void addNewUser(User user, Set<Privileges> privilegesSet);
+    void addNewUser(User user, Set<Privileges> privilegesSet) throws UserAlreadyExistsException;
     void removeUser(User user) throws UserNotFoundException;
     void login(User user);
     void logout(User user);
