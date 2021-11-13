@@ -12,10 +12,6 @@ public class User {
     private String username;
     private String password;
     private Set<Privileges> privileges;
-    // TODO: Privilegije!
-    // TODO: Apstraktna klasa User, koju nasledjuju Superuser i RegularUser?
-    // TODO: mozda da User ima polje gde pisemo kom Skladistu pripada?
-    // TODO: polje tipa boolean isSuperuser
 
 
     public User(){

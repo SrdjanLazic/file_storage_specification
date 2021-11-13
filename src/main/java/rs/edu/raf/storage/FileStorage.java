@@ -30,7 +30,9 @@ public interface FileStorage {
 
     // TODO: work in progress...
     void addNewUser(User user, Set<Privileges> privilegesSet);
-    void disconnectUser(User user) throws UserNotFoundException;
+    void removeUser(User user) throws UserNotFoundException;
+    void login(User user);
+    void logout(User user);
 
 
 
