@@ -77,10 +77,14 @@ public class User {
 
         User user = (User) o;
 
-        if (!Objects.equals(username, user.username)) return false;
-        if (!Objects.equals(password, user.password)) return false;
-        return Objects.equals(privileges, user.privileges);
+        if (!username.equals(user.username)) return false;
+        return password.equals(user.password);
     }
 
-
+    @Override
+    public int hashCode() {
+        int result = username.hashCode();
+        result = 31 * result + password.hashCode();
+        return result;
+    }
 }
