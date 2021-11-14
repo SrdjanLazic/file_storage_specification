@@ -48,11 +48,13 @@ public class User {
         Set<Privileges> privilegesToAdd = new HashSet<>();
 
         if(privileges.contains(Privileges.DELETE))
-            privilegesToAdd.addAll(List.of(Privileges.WRITE, Privileges.READ, Privileges.DELETE));
-        else if(privileges.contains(Privileges.WRITE))
-            privilegesToAdd.addAll(List.of(Privileges.READ, Privileges.WRITE));
-        else if(privileges.contains(Privileges.READ))
-            privilegesToAdd.add((Privileges.READ));
+            privilegesToAdd.addAll(List.of(Privileges.DELETE, Privileges.CREATE, Privileges.DOWNLOAD, Privileges.VIEW));
+        else if(privileges.contains(Privileges.CREATE))
+            privilegesToAdd.addAll(List.of(Privileges.CREATE, Privileges.DOWNLOAD, Privileges.VIEW));
+        else if(privileges.contains(Privileges.DOWNLOAD))
+            privilegesToAdd.addAll(List.of(Privileges.DOWNLOAD, Privileges.VIEW));
+        else if(privileges.contains(Privileges.VIEW))
+            privilegesToAdd.add((Privileges.VIEW));
 
         this.privileges = privilegesToAdd;
     }
