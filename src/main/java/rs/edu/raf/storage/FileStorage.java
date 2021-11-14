@@ -11,16 +11,16 @@ public interface FileStorage {
     // Operacije nad skladistem:
     // ----------------------------------------------------------
 
-    void createFolder(String path, String ... folderNames); // ako unapred zadajemo putanju
-    void createFile(String path, String ... filenames) throws InvalidExtensionException;
-    void createFolder(String folderName); // ako smestamo u korenski dir
-    void createFile(String filename) throws InvalidExtensionException;
-    void delete(String ... paths) throws FileNotFoundException, InsufficientPrivilegesException;
-    void move(String destination, String ... sources);
-    void put(String destination, String ... sources) throws FileAlreadyInStorageException;
-    void list(String path); // default implementacija bez argumenata: prikazi sve foldere i fajlove u root-u skladista
-    void list(String path, String argument, Operations operation);
-    void get(String ... paths);  // preuzimanje u local storage-u je smestanje u neki ranije definisani folder
+    void createFolder(String path, String ... folderNames) throws InsufficientPrivilegesException, FileNotFoundException; // ako unapred zadajemo putanju
+    void createFile(String path, String ... filenames) throws InsufficientPrivilegesException, InvalidExtensionException, FileNotFoundException, FileLimitExceededException;
+    void createFolder(String folderName) throws InsufficientPrivilegesException; // ako smestamo u korenski dir
+    void createFile(String filename) throws InsufficientPrivilegesException, InvalidExtensionException, FileLimitExceededException;
+    void delete(String ... paths) throws FileNotFoundException, InsufficientPrivilegesException, FileDeleteFailedException;
+    void move(String destination, String ... sources) throws InsufficientPrivilegesException, FileLimitExceededException, FileNotFoundException, StorageSizeExceededException, InvalidExtensionException;
+    void put(String destination, String ... sources) throws FileAlreadyInStorageException, FileNotFoundException, FileLimitExceededException, InsufficientPrivilegesException, InvalidExtensionException, StorageSizeExceededException;
+    void list(String path) throws InsufficientPrivilegesException, FileNotFoundException; // default implementacija bez argumenata: prikazi sve foldere i fajlove u root-u skladista
+    void list(String path, String argument, Operations operation)throws InsufficientPrivilegesException, FileNotFoundException;
+    void get(String ... paths) throws InsufficientPrivilegesException, FileNotFoundException;  // preuzimanje u local storage-u je smestanje u neki ranije definisani folder
 
     // TODO: work in progress...
     void initializeStorage(String path) throws UserNotFoundException;
@@ -29,10 +29,10 @@ public interface FileStorage {
     void restrictExtension(String extension) throws InsufficientPrivilegesException;
 
     // TODO: work in progress...
-    void addNewUser(User user, Set<Privileges> privilegesSet) throws UserAlreadyExistsException;
-    void removeUser(User user) throws UserNotFoundException;
-    void login(User user);
-    void logout(User user);
+    void addNewUser(User user, Set<Privileges> privilegesSet) throws UserAlreadyExistsException, InsufficientPrivilegesException;
+    void removeUser(User user) throws UserNotFoundException, InsufficientPrivilegesException;
+    void login(User user) throws UserAlreadyLoggedInException, UserNotFoundException;
+    void logout(User user) throws UserNotFoundException, UserLogoutException;
 
 
 
