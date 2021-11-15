@@ -4,6 +4,7 @@ import rs.edu.raf.storage.enums.Operations;
 import rs.edu.raf.storage.enums.Privileges;
 import rs.edu.raf.storage.exceptions.*;
 
+import java.util.Collection;
 import java.util.Set;
 
 public interface FileStorage {
@@ -21,8 +22,8 @@ public interface FileStorage {
     void delete(String ... paths) throws FileNotFoundException, InsufficientPrivilegesException, FileDeleteFailedException;
     void move(String destination, String ... sources) throws InsufficientPrivilegesException, FileLimitExceededException, FileNotFoundException, StorageSizeExceededException, InvalidExtensionException;
     void put(String destination, String ... sources) throws FileAlreadyInStorageException, FileNotFoundException, FileLimitExceededException, InsufficientPrivilegesException, InvalidExtensionException, StorageSizeExceededException;
-    void list(String path) throws InsufficientPrivilegesException, FileNotFoundException; // default implementacija bez argumenata: prikazi sve foldere i fajlove u root-u skladista
-    void list(String path, String argument, Operations operation)throws InsufficientPrivilegesException, FileNotFoundException;
+    Collection<String> list(String path, boolean searchSubdirectories) throws InsufficientPrivilegesException, FileNotFoundException; // default implementacija bez argumenata: prikazi sve foldere i fajlove u root-u skladista
+    Collection<String> list(String path, String argument, Operations operation, boolean searchSubderictories) throws InsufficientPrivilegesException, FileNotFoundException;
     void get(String ... paths) throws InsufficientPrivilegesException, FileNotFoundException;  // preuzimanje u local storage-u je smestanje u neki ranije definisani folder
 
     // TODO: work in progress...
