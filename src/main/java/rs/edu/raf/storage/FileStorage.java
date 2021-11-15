@@ -7,6 +7,9 @@ import rs.edu.raf.storage.exceptions.*;
 import java.util.Set;
 
 public interface FileStorage {
+    // TODO: srediti potpise metoda (koje exceptione throw-uju):
+
+    // TODO: nijedna metoda ne sme da ispisuje!
 
     // Operacije nad skladistem:
     // ----------------------------------------------------------
