@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+
+/**
+ * Klasa User predstavlja jednog korisnika skladista
+ */
 public class User {
 
     private String username;
@@ -18,6 +22,11 @@ public class User {
 
     }
 
+    /**
+     * Kreira novu instancu klase User
+     * @param username username korisnika
+     * @param password password korisnika
+     */
     public User(String username, String password) {
         this.username = username;
         this.password = password;
@@ -44,6 +53,10 @@ public class User {
         return privileges;
     }
 
+    /**
+     * Postavlja privilegije za korisnika
+     * @param privileges set privilegija koji se dodaje korisniku
+     */
     public void setPrivileges(Set<Privileges> privileges) {
         Set<Privileges> privilegesToAdd = new HashSet<>();
 
