@@ -1,4 +1,5 @@
-package rs.edu.raf.storage;
+package rs.edu.raf.storage.storage_management;
+import rs.edu.raf.storage.user_management.User;
 import rs.edu.raf.storage.enums.Operations;
 import rs.edu.raf.storage.enums.Privileges;
 import rs.edu.raf.storage.exceptions.*;
