@@ -1,10 +1,9 @@
-package rs.edu.raf.storage;
+package rs.edu.raf.storage.user_management;
 
 import rs.edu.raf.storage.enums.Privileges;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 

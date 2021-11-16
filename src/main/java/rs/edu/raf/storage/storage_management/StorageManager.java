@@ -1,4 +1,4 @@
-package rs.edu.raf.storage;
+package rs.edu.raf.storage.storage_management;
 
 public class StorageManager {
 
