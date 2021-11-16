@@ -9,5 +9,11 @@ package rs.edu.raf.storage.enums;
  * Jedino superuser moze imati privilegije za postavljanje konfiguracije skladista i korisnicke administracije
  */
 public enum Privileges {
-    VIEW, CREATE, DELETE, DOWNLOAD
+    DELETE, CREATE, DOWNLOAD, VIEW
+
+    // User 2 = {DELETE, CREATE, DOWNLOAD, VIEW}
+    // folder2 = {DOWNLOAD, VIEW}
+
+
+
 }

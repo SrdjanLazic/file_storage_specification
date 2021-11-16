@@ -190,5 +190,6 @@ public interface FileStorage {
      */
     void logout(User user) throws UserNotFoundException, UserLogoutException;
 
+    void setFolderPrivileges(String path, Set<Privileges> privileges);
 
 }
