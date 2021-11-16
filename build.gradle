@@ -27,6 +27,9 @@ publishing {
     }
 }
 
+task myJavadocs(type: Javadoc) {
+    source = sourceSets.main.allJava
+}
 
 /*run {
     standardInput = System.in
