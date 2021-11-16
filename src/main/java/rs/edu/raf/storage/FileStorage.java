@@ -121,7 +121,7 @@ public interface FileStorage {
 
     /**
      * Inicijalizuje novo skladiste
-     * @param path //TODO
+     * @param path // korenski direktorijum skladista koje se kreira
      * @throws UserNotFoundException korisnik sa unetim kredencijalima nije pronadjen
      */
     void initializeStorage(String path) throws UserNotFoundException;
