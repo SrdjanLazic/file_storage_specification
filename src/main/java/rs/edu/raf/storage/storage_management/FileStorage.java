@@ -192,6 +192,6 @@ public interface FileStorage {
     void logout() throws UserNotFoundException, UserLogoutException;
 
     // TODO: mozda removeFolderPrivileges?
-    void setFolderPrivileges(String path, Set<Privileges> privileges) throws InsufficientPrivilegesException, FileNotFoundException;
+    void setFolderPrivileges(String username, String path, Set<Privileges> privileges) throws InsufficientPrivilegesException, FileNotFoundException;
 
 }
