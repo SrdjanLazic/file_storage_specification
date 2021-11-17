@@ -135,7 +135,7 @@ public interface FileStorage {
      * @param path // korenski direktorijum skladista koje se kreira
      * @throws UserNotFoundException korisnik sa unetim kredencijalima nije pronadjen
      */
-    void initializeStorage(String path) throws UserNotFoundException;
+    void initializeStorage(String path, String username, String password) throws UserNotFoundException;
 
 
     /**
