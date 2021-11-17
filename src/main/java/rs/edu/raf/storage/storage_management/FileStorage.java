@@ -155,42 +155,43 @@ public interface FileStorage {
 
 
     /**
-     * Dodajemo novog korisnika skladista
-     * @param user korisnik kojeg kreiramo, svaki korisnik ima username, password i set privilegija
+     * Dodajemo novog korisnika skladista, svaki korisnik ima username, password i set privilegija
+     * @param username korisnicko ime korisnika kojeg kreiramo
+     * @param password lozinka korisnika kojeg kreiramo
      * @param privilegesSet privilegije korisnika, mogu biti VIEW, CREATE, DELETE, DOWNLOAD
      * @throws UserAlreadyExistsException korisnik kojeg dodajemo vec postoji
      * @throws InsufficientPrivilegesException trenutni korisnik nema neophodne privilegije
      */
-    void addNewUser(User user, Set<Privileges> privilegesSet) throws UserAlreadyExistsException, InsufficientPrivilegesException;
+    void addNewUser(String username, String password, Set<Privileges> privilegesSet) throws UserAlreadyExistsException, InsufficientPrivilegesException;
 
 
     /**
-     * Uklanjamo korisnika skladista
-     * @param user korisnik kojeg uklanjamo, svaki korisnik ima username, password i set privilegija
+     * Uklanjamo korisnika skladista, svaki korisnik ima username, password i set privilegija
+     * @param username korisnicko ime korisnika kojeg uklanjamo
      * @throws UserNotFoundException korisnik sa unetim kredencijalima nije pronadjen
      * @throws InsufficientPrivilegesException trenutni korisnik nema neophodne privilegije
      */
-    void removeUser(User user) throws UserNotFoundException, InsufficientPrivilegesException;
+    void removeUser(String username) throws UserNotFoundException, InsufficientPrivilegesException;
 
 
     /**
-     * Logovanje postojeceg korisnika skladista
-     * @param user korisnik koji se login-uje, svaki korisnik ima username, password i set privilegija
+     * Logovanje postojeceg korisnika skladista, svaki korisnik ima username, password i set privilegija
+     * @param username korisnicko ime korisnika kojeg kreiramo
+     * @param password lozinka korisnika kojeg kreiramo
      * @throws UserAlreadyLoggedInException korisnik je vec ulogovan
      * @throws UserNotFoundException korisnik sa unetim kredencijalima nije pronadjen
      */
-    void login(User user) throws UserAlreadyLoggedInException, UserNotFoundException;
+    void login(String username, String password) throws UserAlreadyLoggedInException, UserNotFoundException;
 
 
     /**
-     * Logautovanje postojeceg skladista
-     * @param user korisnik koji se logout-uje, svaki korisnik ima username, password i set privilegija
+     * Logautovanje postojeceg skladista, svaki korisnik ima username, password i set privilegija
      * @throws UserNotFoundException korisnik sa unetim kredencijalima nije pronadjen
      * @throws UserLogoutException korisnik nije trenutni aktivni korisnik
      */
-    void logout(User user) throws UserNotFoundException, UserLogoutException;
+    void logout() throws UserNotFoundException, UserLogoutException;
 
     // TODO: mozda removeFolderPrivileges?
-    void setFolderPrivileges(String path, Set<Privileges> privileges);
+    void setFolderPrivileges(String path, Set<Privileges> privileges) throws InsufficientPrivilegesException, FileNotFoundException;
 
 }
