@@ -14,8 +14,9 @@ public interface FileStorage {
      * @param folderNames nazivi foldera koji se kreiraju
      * @throws InsufficientPrivilegesException trenutni korisnik nema neophodne privilegije
      * @throws FileNotFoundException ne postoji folder ili fajl na zadatoj putanji
+     * @throws CurrentUserIsNullException nijedan korisnik nije trenutno ulogovan
      */
-    void createFolder(String path, String ... folderNames) throws InsufficientPrivilegesException, FileNotFoundException; // ako unapred zadajemo putanju
+    void createFolder(String path, String ... folderNames) throws InsufficientPrivilegesException, FileNotFoundException, CurrentUserIsNullException; // ako unapred zadajemo putanju
 
 
     /**
@@ -26,16 +27,18 @@ public interface FileStorage {
      * @throws InvalidExtensionException skladiste ne podrzava ekstenziju prosledjenog fajla
      * @throws FileNotFoundException ne postoji folder ili fajl na zadatoj putanji
      * @throws FileLimitExceededException prekoracen je broj fajlova koji se mogu smestiti u folder
+     * @throws CurrentUserIsNullException nijedan korisnik nije trenutno ulogovan
      */
-    void createFile(String path, String ... filenames) throws InsufficientPrivilegesException, InvalidExtensionException, FileNotFoundException, FileLimitExceededException;
+    void createFile(String path, String ... filenames) throws InsufficientPrivilegesException, InvalidExtensionException, FileNotFoundException, FileLimitExceededException, CurrentUserIsNullException;
 
 
     /**
      * Kreira folder u korenskom direktorijumu skladista
      * @param folderName naziv foldera koji se kreira
      * @throws InsufficientPrivilegesException trenutni korisnik nema neophodne privilegije
+     * @throws CurrentUserIsNullException nijedan korisnik nije trenutno ulogovan
      */
-    void createFolder(String folderName) throws InsufficientPrivilegesException; // ako smestamo u korenski dir
+    void createFolder(String folderName) throws InsufficientPrivilegesException, CurrentUserIsNullException; // ako smestamo u korenski dir
 
 
     /**
@@ -44,8 +47,9 @@ public interface FileStorage {
      * @throws InsufficientPrivilegesException trenutni korisnik nema neophodne privilegije
      * @throws InvalidExtensionException skladiste ne podrzava ekstenziju prosledjenog fajla
      * @throws FileLimitExceededException prekoracen je broj fajlova koji se mogu smestiti u folder
+     * @throws CurrentUserIsNullException nijedan korisnik nije trenutno ulogovan
      */
-    void createFile(String filename) throws InsufficientPrivilegesException, InvalidExtensionException, FileLimitExceededException;
+    void createFile(String filename) throws InsufficientPrivilegesException, InvalidExtensionException, FileLimitExceededException, CurrentUserIsNullException;
 
 
     /**
@@ -54,8 +58,9 @@ public interface FileStorage {
      * @throws FileNotFoundException ne postoji folder ili fajl na zadatoj putanji
      * @throws InsufficientPrivilegesException trenutni korisnik nema neophodne privilegije
      * @throws FileDeleteFailedException fajl nije uspesno obrisan
+     * @throws CurrentUserIsNullException nijedan korisnik nije trenutno ulogovan
      */
-    void delete(String ... paths) throws FileNotFoundException, InsufficientPrivilegesException, FileDeleteFailedException;
+    void delete(String ... paths) throws FileNotFoundException, InsufficientPrivilegesException, FileDeleteFailedException, CurrentUserIsNullException;
 
 
     /**
@@ -68,8 +73,9 @@ public interface FileStorage {
      * @throws FileNotFoundException ne postoji folder ili fajl na zadatoj putanji
      * @throws StorageSizeExceededException prekoracena je maksimalna dozvoljena velicina skladista
      * @throws InvalidExtensionException skladiste ne podrzava ekstenziju prosledjenog fajla
+     * @throws CurrentUserIsNullException nijedan korisnik nije trenutno ulogovan
      */
-    void move(String destination, String ... sources) throws InsufficientPrivilegesException, OperationFailedException, FileLimitExceededException, FileNotFoundException, StorageSizeExceededException, InvalidExtensionException;
+    void move(String destination, String ... sources) throws InsufficientPrivilegesException, OperationFailedException, FileLimitExceededException, FileNotFoundException, StorageSizeExceededException, InvalidExtensionException, CurrentUserIsNullException;
 
 
     /**
@@ -83,8 +89,9 @@ public interface FileStorage {
      * @throws InsufficientPrivilegesException trenutni korisnik nema neophodne privilegije
      * @throws InvalidExtensionException skladiste ne podrzava ekstenziju prosledjenog fajla
      * @throws StorageSizeExceededException prekoracena je maksimalna dozvoljena velicina skladista
+     * @throws CurrentUserIsNullException nijedan korisnik nije trenutno ulogovan
      */
-    void put(String destination, String ... sources) throws FileAlreadyInStorageException, OperationFailedException, FileNotFoundException, FileLimitExceededException, InsufficientPrivilegesException, InvalidExtensionException, StorageSizeExceededException;
+    void put(String destination, String ... sources) throws FileAlreadyInStorageException, OperationFailedException, FileNotFoundException, FileLimitExceededException, InsufficientPrivilegesException, InvalidExtensionException, StorageSizeExceededException, CurrentUserIsNullException;
 
 
     /**
@@ -94,8 +101,9 @@ public interface FileStorage {
      * @return vraca listu stringova gde je svaki string u formatu "putanja fajla - velicina fajla - tip fajla"
      * @throws InsufficientPrivilegesException trenutni korisnik nema neophodne privilegije
      * @throws FileNotFoundException ne postoji folder ili fajl na zadatoj putanji
+     * @throws CurrentUserIsNullException nijedan korisnik nije trenutno ulogovan
      */
-    Collection<String> list(String path, boolean searchSubdirectories) throws InsufficientPrivilegesException, FileNotFoundException; // default implementacija bez argumenata: prikazi sve foldere i fajlove u root-u skladista
+    Collection<String> list(String path, boolean searchSubdirectories) throws InsufficientPrivilegesException, FileNotFoundException, CurrentUserIsNullException; // default implementacija bez argumenata: prikazi sve foldere i fajlove u root-u skladista
 
 
     /**
@@ -107,8 +115,9 @@ public interface FileStorage {
      * @return vraca listu stringova gde je svaki string u formatu "putanja fajla - velicina fajla - tipafajla"
      * @throws InsufficientPrivilegesException trenutni korisnik nema neophodne privilegije
      * @throws FileNotFoundException ne postoji folder ili fajl na zadatoj putanji
+     * @throws CurrentUserIsNullException nijedan korisnik nije trenutno ulogovan
      */
-    Collection<String> list(String path, String argument, Operations operation, boolean searchSubderictories) throws InsufficientPrivilegesException, FileNotFoundException;
+    Collection<String> list(String path, String argument, Operations operation, boolean searchSubderictories) throws InsufficientPrivilegesException, FileNotFoundException, CurrentUserIsNullException;
 
 
     /**
@@ -116,8 +125,9 @@ public interface FileStorage {
      * @param paths fajl koji se preuzima iz skladista
      * @throws InsufficientPrivilegesException trenutni korisnik nema neophodne privilegije
      * @throws FileNotFoundException ne postoji folder ili fajl na zadatoj putanji
+     * @throws CurrentUserIsNullException nijedan korisnik nije trenutno ulogovan
      */
-    void get(String ... paths) throws InsufficientPrivilegesException, FileNotFoundException;  // preuzimanje u local storage-u je smestanje u neki ranije definisani folder
+    void get(String ... paths) throws InsufficientPrivilegesException, FileNotFoundException, CurrentUserIsNullException;  // preuzimanje u local storage-u je smestanje u neki ranije definisani folder
 
 
     /**
@@ -134,24 +144,27 @@ public interface FileStorage {
      * @param directory direktorijum ciji broj fajlova ogranicavamo
      * @throws InsufficientPrivilegesException trenutni korisnik nema neophodne privilegije
      * @throws FileNotFoundException ne postoji folder ili fajl na zadatoj putanji
+     * @throws CurrentUserIsNullException nijedan korisnik nije trenutno ulogovan
      */
-    void limitNumberOfFiles(int number, String directory) throws InsufficientPrivilegesException, FileNotFoundException;
+    void limitNumberOfFiles(int number, String directory) throws InsufficientPrivilegesException, FileNotFoundException, CurrentUserIsNullException;
 
 
     /**
      * Dodajemo ogranicenje maksimalne velicine skladista u bajtovima koja se ne moze prekoraciti
      * @param sizeInBytes velicina u bajtovima na koju ogranicavamo velicinu skladista
      * @throws InsufficientPrivilegesException trenutni korisnik nema neophodne privilegije
+     * @throws CurrentUserIsNullException nijedan korisnik nije trenutno ulogovan
      */
-    void limitStorageSize(long sizeInBytes) throws InsufficientPrivilegesException;
+    void limitStorageSize(long sizeInBytes) throws InsufficientPrivilegesException, CurrentUserIsNullException;
 
 
     /**
      * Dodajemo ogranicenje ekstenzije fajla koja se ne moze dodati u skladiste
      * @param extension ekstenzija koju zabranjujemo u skladistu
      * @throws InsufficientPrivilegesException trenutni korisnik nema neophodne privilegije
+     * @throws CurrentUserIsNullException nijedan korisnik nije trenutno ulogovan
      */
-    void restrictExtension(String extension) throws InsufficientPrivilegesException;
+    void restrictExtension(String extension) throws InsufficientPrivilegesException, CurrentUserIsNullException;
 
 
     /**
@@ -161,8 +174,9 @@ public interface FileStorage {
      * @param privilegesSet privilegije korisnika, mogu biti VIEW, CREATE, DELETE, DOWNLOAD
      * @throws UserAlreadyExistsException korisnik kojeg dodajemo vec postoji
      * @throws InsufficientPrivilegesException trenutni korisnik nema neophodne privilegije
+     * @throws CurrentUserIsNullException nijedan korisnik nije trenutno ulogovan
      */
-    void addNewUser(String username, String password, Set<Privileges> privilegesSet) throws UserAlreadyExistsException, InsufficientPrivilegesException;
+    void addNewUser(String username, String password, Set<Privileges> privilegesSet) throws UserAlreadyExistsException, InsufficientPrivilegesException, CurrentUserIsNullException;
 
 
     /**
@@ -170,8 +184,9 @@ public interface FileStorage {
      * @param username korisnicko ime korisnika kojeg uklanjamo
      * @throws UserNotFoundException korisnik sa unetim kredencijalima nije pronadjen
      * @throws InsufficientPrivilegesException trenutni korisnik nema neophodne privilegije
+     * @throws CurrentUserIsNullException nijedan korisnik nije trenutno ulogovan
      */
-    void removeUser(String username) throws UserNotFoundException, InsufficientPrivilegesException;
+    void removeUser(String username) throws UserNotFoundException, InsufficientPrivilegesException, CurrentUserIsNullException;
 
 
     /**
@@ -180,18 +195,29 @@ public interface FileStorage {
      * @param password lozinka korisnika kojeg kreiramo
      * @throws UserAlreadyLoggedInException korisnik je vec ulogovan
      * @throws UserNotFoundException korisnik sa unetim kredencijalima nije pronadjen
+     * @throws CurrentUserIsNullException nijedan korisnik nije trenutno ulogovan
      */
-    void login(String username, String password) throws UserAlreadyLoggedInException, UserNotFoundException;
+    void login(String username, String password) throws UserAlreadyLoggedInException, UserNotFoundException, CurrentUserIsNullException;
 
 
     /**
      * Logautovanje postojeceg skladista, svaki korisnik ima username, password i set privilegija
      * @throws UserNotFoundException korisnik sa unetim kredencijalima nije pronadjen
      * @throws UserLogoutException korisnik nije trenutni aktivni korisnik
+     * @throws CurrentUserIsNullException nijedan korisnik nije trenutno ulogovan
      */
-    void logout() throws UserNotFoundException, UserLogoutException;
+    void logout() throws UserNotFoundException, UserLogoutException, CurrentUserIsNullException;
 
     // TODO: mozda removeFolderPrivileges?
-    void setFolderPrivileges(String username, String path, Set<Privileges> privileges) throws InsufficientPrivilegesException, FileNotFoundException;
+
+    /**
+     * @param username korisnicko ime korisnika kome zelimo postaviti privilegije
+     * @param path folder na koji zelimo korisniku postaviti privilegije
+     * @param privileges privilegija koju zelimo postaviti
+     * @throws InsufficientPrivilegesException trenutni korisnik nema neophodne privilegije
+     * @throws FileNotFoundException ne postoji folder na zadatoj putanji za postavljanje privilegije
+     * @throws CurrentUserIsNullException nijedan korisnik nije trenutno ulogovan
+     */
+    void setFolderPrivileges(String username, String path, Set<Privileges> privileges) throws InsufficientPrivilegesException, FileNotFoundException, CurrentUserIsNullException;
 
 }
