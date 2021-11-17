@@ -2,9 +2,7 @@ package rs.edu.raf.storage.user_management;
 
 import rs.edu.raf.storage.enums.Privileges;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 /**
@@ -15,7 +13,7 @@ public class User {
     private String username;
     private String password;
     private Set<Privileges> privileges;
-
+    private Map<String, Set<Privileges>> folderPrivileges = new HashMap<>();
 
     public User(){
 
@@ -87,14 +85,19 @@ public class User {
 
         User user = (User) o;
 
-        if (!username.equals(user.username)) return false;
-        return password.equals(user.password);
+        return username.equalsIgnoreCase(user.username);
     }
 
     @Override
     public int hashCode() {
-        int result = username.hashCode();
-        result = 31 * result + password.hashCode();
-        return result;
+        return username.hashCode();
+    }
+
+    public Map<String, Set<Privileges>> getFolderPrivileges() {
+        return folderPrivileges;
+    }
+
+    public void setFolderPrivileges(Map<String, Set<Privileges>> folderPrivileges) {
+        this.folderPrivileges = folderPrivileges;
     }
 }
