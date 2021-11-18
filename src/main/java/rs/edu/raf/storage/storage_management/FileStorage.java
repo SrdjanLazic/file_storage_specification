@@ -211,6 +211,7 @@ public interface FileStorage {
     // TODO: mozda removeFolderPrivileges?
 
     /**
+     * Postavljamo odredjenom korisniku date privilegije na datoj folderskoj putanji
      * @param username korisnicko ime korisnika kome zelimo postaviti privilegije
      * @param path folder na koji zelimo korisniku postaviti privilegije
      * @param privileges privilegija koju zelimo postaviti

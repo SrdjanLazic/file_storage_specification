@@ -1,5 +1,4 @@
 plugins {
-    id 'application'
     id 'java'
     id 'maven-publish'
 }
@@ -11,9 +10,7 @@ repositories {
     mavenCentral()
 }
 
-application {
-    //mainClassName = "rs.edu.raf.storage.Main"
-}
+
 
 publishing {
     publications {
@@ -30,10 +27,6 @@ publishing {
 task myJavadocs(type: Javadoc) {
     source = sourceSets.main.allJava
 }
-
-/*run {
-    standardInput = System.in
-}*/
 
 // TODO: scope runtime videti gde se dodaje
 
