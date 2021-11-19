@@ -14,7 +14,7 @@ repositories {
 
 publishing {
     publications {
-        maven(MavenPublication) {
+        mavenJava(MavenPublication) {
             groupId = 'rs.edu.raf'
             artifactId = 'file-storage-specification'
             version = '1.0'
@@ -24,8 +24,8 @@ publishing {
     }
 }
 
-task myJavadocs(type: Javadoc) {
-    source = sourceSets.main.allJava
+java {
+    withJavadocJar()
 }
 
 // TODO: scope runtime videti gde se dodaje
